@@ -69,10 +69,37 @@ body {
     font-size: 1em;
     margin-right: 5px;
     transition: background-color 0.3s;
+    position: relative; /* To position the dropdown */
 }
 
 .dropdown-btn:hover {
     background-color: #4a4a4a;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2b2b2b;
+    border: 1px solid #444;
+    border-radius: 8px;
+    min-width: 180px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    padding: 10px 0;
+    list-style: none;
+    text-align: left;
+}
+
+.dropdown-content li {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #e0e0e0;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content li:hover {
+    background-color: #3a3a3a;
 }
 
 /* Search Form Styling */
@@ -186,10 +213,6 @@ input[type="text"]:focus {
 
 <!-- Embedded JavaScript -->
 <script>
-    const logos = {
-        google: 'image.png'
-    };
-
     function setFiletype(fileType, buttonData, resType, glyph) {
         document.getElementById("query").placeholder = `Search anything e.g., ${buttonData}`;
         document.getElementById("fileType").value = fileType;
