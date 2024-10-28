@@ -75,32 +75,6 @@ body {
     background-color: #4a4a4a;
 }
 
-/* Dropdown Menu */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #2b2b2b;
-    border: 1px solid #444;
-    border-radius: 8px;
-    min-width: 180px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-    z-index: 1;
-    padding: 10px 0;
-    list-style: none;
-    text-align: left;
-}
-
-.dropdown-content li {
-    padding: 10px 15px;
-    cursor: pointer;
-    color: #e0e0e0;
-    transition: background-color 0.3s;
-}
-
-.dropdown-content li:hover {
-    background-color: #3a3a3a;
-}
-
 /* Search Form Styling */
 .search-form {
     display: flex;
@@ -199,16 +173,10 @@ input[type="text"]:focus {
                 <li onclick="setFiletype('-1', 'Other', 'all', 'asterisk')">Other</li>
             </ul>
 
-            <button id="egbutton" type="button" class="dropdown-btn" onclick="toggleDropdown('engineDropdown')">
+            <!-- Removed dropdown for engine selection -->
+            <button id="egbutton" type="button" class="dropdown-btn" style="display:none;">
                 Google <span class="caret">▼</span>
             </button>
-            <ul id="engineDropdown" class="dropdown-content">
-                <li onclick="setEngine('google')">Google</li>
-                <li onclick="setEngine('googol')">Googol</li>
-                <li onclick="setEngine('startpage')">Startpage</li>
-                <li onclick="setEngine('searx')">Searx</li>
-                <li onclick="setEngine('filepursuit')">FilePursuit</li>
-            </ul>
 
             <input type="text" name="query" id="query" placeholder="Search anything e.g. The.Blacklist.S01.E01">
             <button type="submit" class="search-btn">🔍</button>
@@ -230,9 +198,9 @@ input[type="text"]:focus {
         closeDropdowns();
     }
 
+    // Set default engine to Google, no visible change
     function setEngine(engine) {
         document.getElementById("engine").value = engine;
-        document.getElementById("egbutton").innerText = engine.charAt(0).toUpperCase() + engine.slice(1) + " ▼";
         closeDropdowns();
     }
 
@@ -245,10 +213,7 @@ input[type="text"]:focus {
             " -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml) intitle:index.of";
 
         const urls = {
-            google: `https://www.google.com/search?q=${encodeURIComponent(finalQuery)}`,
-            googol: `https://googol.warriordudimanche.net/?q=${encodeURIComponent(finalQuery)}`,
-            startpage: `https://www.startpage.com/do/dsearch?query=${encodeURIComponent(finalQuery)}`,
-            searx: `https://searx.me/?q=${encodeURIComponent(finalQuery)}`
+            google: `https://www.google.com/search?q=${encodeURIComponent(finalQuery)}`
         };
         window.open(urls[engine], '_blank');
     }
@@ -260,7 +225,6 @@ input[type="text"]:focus {
 
     function closeDropdowns() {
         document.getElementById("fileDropdown").style.display = 'none';
-        document.getElementById("engineDropdown").style.display = 'none';
     }
 
     document.addEventListener('click', function(event) {
